@@ -1,0 +1,14 @@
+.header{
+ height: 80px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ border: 1px solid #ccc;
+}
+.menu{
+    display: flex;
+    list-style: none;
+    & li{
+        padding: 0 20px;
+    }
+}

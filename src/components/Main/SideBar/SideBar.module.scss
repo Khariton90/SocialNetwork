@@ -1,0 +1,21 @@
+.sidebar{
+    flex: 0.2;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-bottom: none;
+    border-top: none;
+}
+.menu{
+    list-style: none;
+    & li{
+        margin-bottom: 5px;
+    }
+    & a{
+        text-decoration: none;
+        color: #000;
+        font-size: 20px;
+        &.active{
+            color: #ccc;
+        }
+    }
+}
