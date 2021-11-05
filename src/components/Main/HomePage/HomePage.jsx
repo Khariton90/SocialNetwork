@@ -4,10 +4,9 @@ import React from 'react';
 import { ChangeNewPostActionCreator, AddPostActionCreator } from '../../../redux/homeReducer'
 
 const HomePage = (props) => {
-
     let newPostElement = React.createRef();
-    let newPost = props.state.newPost;
-    let posts = props.state.posts;
+    let newPost = props.state.getState().homePage.newPost;
+    let posts = props.state.getState().homePage.posts;
     let onChangeMyPost = () => {
         let text = newPostElement.current.value;
         props.dispatch(ChangeNewPostActionCreator(text));

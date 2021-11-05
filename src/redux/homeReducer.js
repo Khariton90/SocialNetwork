@@ -1,7 +1,14 @@
 const CHANGE_NEW_POST = 'CHANGE-NEW-POST';
 const ADD_POST = 'ADD-POST';
-
-const homeReducer = (state, action) => {
+let initialState = {
+  posts: [
+      {id:1, post: 'Hello man', likeCount: 11, likeActive: false},
+      {id:2, post: 'Hello man', likeCount: 11, likeActive: false},
+      {id:3, post: 'Hello man', likeCount: 11, likeActive: false}
+    ],
+    newPost: '',
+}
+const homeReducer = (state = initialState, action) => {
     switch (action.type){
         case CHANGE_NEW_POST:
         state.newPost = action.post;

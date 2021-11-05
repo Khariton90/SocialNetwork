@@ -4,7 +4,7 @@ import People from './Dialog/People';
 import {ChangeNewMessageCreator, SendNewMessageCreator} from '../../../redux/dialogsReducer';
 
 const DialogPage = (props) => {
-    let state = props.store.getState().DialogsPage;
+    let state = props.store.getState().dialogsPage;
     let dialogs = state.dialogs;
     let people = state.people;
     let newSendMessage = state.newSendMessage;
