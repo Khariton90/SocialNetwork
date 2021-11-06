@@ -1,18 +1,15 @@
 import style from './HomePage.module.scss';
 import Posts from './Posts/Posts';
-import React from 'react';
-import { ChangeNewPostActionCreator, AddPostActionCreator } from '../../../redux/homeReducer'
 
 const HomePage = (props) => {
-    let newPostElement = React.createRef();
-    let newPost = props.state.getState().homePage.newPost;
-    let posts = props.state.getState().homePage.posts;
-    let onChangeMyPost = () => {
-        let text = newPostElement.current.value;
-        props.dispatch(ChangeNewPostActionCreator(text));
+    let newPost = props.newPost
+    let posts = props.posts
+    let onChangeMyPost = (e) => {
+        let text = e.target.value
+        props.onChangeMyPost(text);
     }
     let addMyPost = () => {
-        props.dispatch(AddPostActionCreator());
+        props.addMyPost();
     }
     return (
         <div className={style.home}>
@@ -27,7 +24,7 @@ const HomePage = (props) => {
                 <div className={style.wallForm}>
                     {/* ТекстАреа */}
                     <div className={style.textarea}>
-                        <textarea ref={newPostElement} value={newPost} onChange={onChangeMyPost}></textarea>
+                        <textarea value={newPost} onChange={onChangeMyPost}></textarea>
                     </div>
                     <div className={style.wallBtn}>
                         <button onClick={addMyPost}>Send</button>
