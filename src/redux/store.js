@@ -1,5 +1,5 @@
-import homeReducer from './homeReducer';
-import dialogsReducer from './dialogsReducer';
+// import homeReducer from './homeReducer';
+// import dialogsReducer from './dialogsReducer';
 let store = {
   _state:{
     ProfilePage :{

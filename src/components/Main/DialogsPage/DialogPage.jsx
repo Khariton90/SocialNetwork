@@ -1,26 +1,16 @@
 import style from './DialogPage.module.scss';
 import Dialog from './Dialog/Dialog';
-import People from './Dialog/People';
-import {ChangeNewMessageCreator, SendNewMessageCreator} from '../../../redux/dialogsReducer';
-import StoreContext from '../../../StoreContext';
-const DialogPage = () => {
-
-    return <StoreContext.Consumer>
-        { store => {
-                let state = store.getState().dialogsPage;
-                let dialogs = state.dialogs;
-                let people = state.people;
-                let newSendMessage = state.newSendMessage;
-            
-                let changeMessage = (e) => {
+import People from './Dialog/People'
+const DialogPage = (props) => {
+                let dialog = props.dialogs.map(el => <Dialog key={el.id} dialog={el.dialog}/>);
+                let person = props.people.map(el => <People key={el.id} person={el} />)
+                let changeMessage = (e) =>{
                     let body = e.target.value;
-                    return store.dispatch(ChangeNewMessageCreator(body))
+                    props.changeMessage(body);
                 }
                 let sendNewMessage = () => {
-                   store.dispatch(SendNewMessageCreator());
+                    props.sendNewMessage();
                 }
-                let dialog = dialogs.map(el => <Dialog key={el.id} dialog={el.dialog}/>);
-                let person = people.map(el => <People key={el.id} person={el} />)
             return(
                 <div className={style.dialogPage}>
                     <div className={style.people}>
@@ -30,7 +20,7 @@ const DialogPage = () => {
                         {dialog}
                         <div>
                         <div>
-                            <textarea value={newSendMessage} onChange={ changeMessage }></textarea>
+                            <textarea value={props.newSendMessage} onChange={ changeMessage }></textarea>
                         </div>
                         <div><button onClick={ sendNewMessage }>Send</button></div>
                     </div>
@@ -38,10 +28,6 @@ const DialogPage = () => {
         
                 </div>
             )
-        }
-
-        }
-    </StoreContext.Consumer>
     
 }
 

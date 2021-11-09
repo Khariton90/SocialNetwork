@@ -3,8 +3,9 @@ import { BrowserRouter, Route} from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import SideBar from "./components/Main/SideBar/SideBar";
-import DialogPage from "./components/Main/DialogsPage/DialogPage";
+import DialogPageContainer from "./components/Main/DialogsPage/DialogPageContainer";
 import HomePageContainer from './components/Main/HomePage/HomePageContainer';
+
 
 const App = (props) => {
   return <div className="app">
@@ -12,8 +13,8 @@ const App = (props) => {
     <BrowserRouter>
       <main className="page">
         <SideBar />
-        <Route path="/" exact render={() => <HomePageContainer store={props.store} dispatch={props.dispatch}/>}/>
-        <Route path="/messages" render={() => <DialogPage store={props.store}/>} />
+        <Route path="/" exact render={() => <HomePageContainer/>}/>
+        <Route path="/messages" render={() => <DialogPageContainer />} />
       </main>
     </BrowserRouter>
     <Footer />

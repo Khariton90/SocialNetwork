@@ -10,20 +10,25 @@ let initialState = {
 }
 const homeReducer = (state = initialState, action) => {
     switch (action.type){
-        case CHANGE_NEW_POST:
-        state.newPost = action.post;
-        return state
-      case ADD_POST:
+        case CHANGE_NEW_POST:{
+          let StateCopy = {...state}
+          StateCopy.newPost = action.post;
+        return StateCopy
+        }
+      case ADD_POST: 
+      {
+        let StateCopy = {...state}
         let myNewPost = {
-          id: state.posts.length + 1,
-          post: state.newPost,
+          id: StateCopy.posts.length + 1,
+          post: StateCopy.newPost,
           likeCount: 0
         }
-        if(state.newPost){
-            state.posts.push(myNewPost);
-            state.newPost = '';
+        if(StateCopy.newPost){
+          StateCopy.posts.push(myNewPost);
+          StateCopy.newPost = '';
         }
-        return state
+        return StateCopy 
+      }
         default: 
         return state
     }

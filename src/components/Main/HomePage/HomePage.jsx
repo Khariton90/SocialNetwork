@@ -2,14 +2,12 @@ import style from './HomePage.module.scss';
 import Posts from './Posts/Posts';
 
 const HomePage = (props) => {
-    let newPost = props.newPost
-    let posts = props.posts
     let onChangeMyPost = (e) => {
         let text = e.target.value
-        props.onChangeMyPost(text);
+        props.onChangeMyPostContainer(text);
     }
     let addMyPost = () => {
-        props.addMyPost();
+        props.addMyPostContainer();
     }
     return (
         <div className={style.home}>
@@ -24,13 +22,13 @@ const HomePage = (props) => {
                 <div className={style.wallForm}>
                     {/* ТекстАреа */}
                     <div className={style.textarea}>
-                        <textarea value={newPost} onChange={onChangeMyPost}></textarea>
+                        <textarea value={props.newPost} onChange={onChangeMyPost}></textarea>
                     </div>
                     <div className={style.wallBtn}>
                         <button onClick={addMyPost}>Send</button>
                     </div>
                 </div>
-            <Posts posts={posts}/>
+            <Posts posts={props.posts}/>
             </div>
         </div>
     )
