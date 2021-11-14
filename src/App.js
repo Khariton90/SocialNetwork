@@ -5,7 +5,7 @@ import Footer from "./components/Footer/Footer";
 import SideBar from "./components/Main/SideBar/SideBar";
 import DialogPageContainer from "./components/Main/DialogsPage/DialogPageContainer";
 import HomePageContainer from './components/Main/HomePage/HomePageContainer';
-
+import UsersPageContainer from './components/Main/UsersPage/UsersPageContainer';
 
 const App = (props) => {
   return <div className="app">
@@ -15,6 +15,7 @@ const App = (props) => {
         <SideBar />
         <Route path="/" exact render={() => <HomePageContainer/>}/>
         <Route path="/messages" render={() => <DialogPageContainer />} />
+        <Route path="/users" render={() => <UsersPageContainer /> } />
       </main>
     </BrowserRouter>
     <Footer />
