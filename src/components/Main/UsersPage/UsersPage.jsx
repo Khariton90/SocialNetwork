@@ -1,34 +1,34 @@
 import style from './UsersPage.module.scss';
-import male from './../../../assets/img/maleUser.jpg';
-import female from './../../../assets/img/femaleUser.jpg';
 import React from 'react';
-import axios from 'axios';
-class UsersPage extends React.Component{
-
-    componentDidMount(){
-        axios.get(`https://jsonplaceholder.typicode.com/users?&_limit=6`).then(response => {
-            this.props.setusers(response.data)
-        })
+import * as axios from 'axios'
+import { NavLink } from 'react-router-dom';
+const UsersPage = ({props}) => {
+    let show = () => {
+        let load = false
+        props.isfetching(load)
+        let limit = props.usersPage.users.length + 4;
+        props.showmore(limit)
+        window.setTimeout(() => {
+            axios.get(`https://jsonplaceholder.typicode.com/users?&_limit=${limit}`).then(response => {
+                props.setusers(response.data)
+                load = true
+                props.isfetching(load)
+            })
+        },400)
     }
-    render() {
-
-        return (
-            <div>
-                {
-                    this.props.users.map(el => <div key={el.id} className={style.users}>
-                <div className={style.userPhoto}>{el.gender === 'male' ? <img src={male} alt={el.gender}/>: <img src={female} alt={el.gender}/>}</div>
-                    <div className={style.userName}>{el.name}</div>
-                 <div> {el.company.catchPhrase} </div>
-                    <div>{el.follow 
-                    ? <button onClick={() => {this.props.unfollow(el.id)}} className={style.follow}>Подписаться</button> 
-                    : <button onClick={() => {this.props.follow(el.id)}} className={style.unfollow}>Удалить из друзей</button>}
-                </div>
-                </div>)
-                }
-
-            </div>
-        )
-    }
+    let users = props.usersPage.users.map(user => <div key={user.id}> <NavLink to={`/users/${user.id}`}>{user.name}</NavLink>
+                 {
+                 user.follow 
+                 ? <div><button onClick={() => props.unfollow(user.id)} className={style.unfollow}>Отписаться</button></div> 
+                 : <div><button onClick={() => props.follow(user.id)} className={style.follow}>Подписаться</button></div> 
+                 }
+    </div>)
+    return (
+        <div className={style.usersPage}>
+            {users}
+            {<div className={style.showMore}><button onClick={() => show()}>Показать еще</button></div>}
+        </div>
+    )
 }
 
 export default UsersPage;

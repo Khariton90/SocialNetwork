@@ -1,3 +1,6 @@
+.usersPage{
+    flex: 0.8;
+}
 .users{
     margin:20px;
 }
@@ -23,4 +26,14 @@
 }
 .unfollow{
     background-color: tomato;
+}
+.showMore{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.showMore button{
+    padding: 5px 30px;
+    background-color: darkseagreen;  
+    margin: 20px;  
 }

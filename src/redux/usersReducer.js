@@ -1,17 +1,22 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
-const SETUSERS = 'SET-USERS';
+const SET_USERS = 'SET_USERS';
+const SHOW_MORE = 'SHOW_MORE';
+const IS_FETCHING = 'IS_FETCHING';
 let initialState = {
     users: [
 
     ],
-    limit: 10
+    limit: 4,
+    limitSize: 1,
+    isFetching: false
 }
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case FOLLOW: 
         return {
+            ...state,
             users:[...state.users].map(u => {
                 if(u.id === action.id){
                     u.follow = true
@@ -21,6 +26,7 @@ const usersReducer = (state = initialState, action) => {
         }
         case UNFOLLOW:
             return {
+                ...state,
                 users: [...state.users].map(u =>{
                     if(u.id === action.id){
                         u.follow = false
@@ -28,10 +34,15 @@ const usersReducer = (state = initialState, action) => {
                     return u;
                 })
             }
-        case SETUSERS: 
-            return{
-                users: [...action.users]
+        case SET_USERS: {
+             return {...state, users: [...action.users] } 
             }
+        case SHOW_MORE: {
+            return {...state, limit: action.limit}
+        }
+        case IS_FETCHING: {
+            return {...state, isFetching: action.load}
+        }
         default: 
         return state
     }
@@ -50,8 +61,20 @@ export const unfollow = (id) => {
 }
 export const setusers = (users) => {
     return {
-        type: SETUSERS,
+        type: SET_USERS,
         users
+    }
+}
+export const showmore = (limit) => {
+    return {
+        type: SHOW_MORE,
+        limit
+    }
+}
+export const isfetching = (load) => {
+    return{
+        type: IS_FETCHING,
+        load
     }
 }
 export default usersReducer;

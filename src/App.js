@@ -15,7 +15,7 @@ const App = (props) => {
         <SideBar />
         <Route path="/" exact render={() => <HomePageContainer/>}/>
         <Route path="/messages" render={() => <DialogPageContainer />} />
-        <Route path="/users" render={() => <UsersPageContainer /> } />
+        <Route path="/users:usersId?" render={() => <UsersPageContainer /> } />
       </main>
     </BrowserRouter>
     <Footer />
